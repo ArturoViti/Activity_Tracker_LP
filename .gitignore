@@ -1,8 +1,4 @@
 ./idea
 cmake-build-debug/
-/.idea/.gitignore
-/.idea/Activity_Tracker_LP.iml
-/.idea/modules.xml
-/.idea/QtSettings.xml
-/.idea/misc.xml
-/.idea/vcs.xml
+/.idea/*
+/test/lib/googletest/*

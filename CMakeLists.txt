@@ -6,17 +6,19 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+add_subdirectory(test)
 
 find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
         REQUIRED)
-
+add_library(core ${SOURCE_FILES})
 add_executable(Activity_Tracker_LP main.cpp)
 target_link_libraries(Activity_Tracker_LP
         Qt::Core
         Qt::Gui
         Qt::Widgets
 )
+
 
