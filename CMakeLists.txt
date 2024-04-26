@@ -25,8 +25,6 @@ add_executable(Activity_Tracker_LP main.cpp
         model/Activity.h
         model/DayActivities.cpp
         model/DayActivities.h
-        model/SportActivity.cpp
-        model/SportActivity.h
         exception/WrongIntervalException.cpp
         exception/WrongIntervalException.h
 )
