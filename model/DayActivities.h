@@ -4,6 +4,7 @@
 #include<QDate>
 #include<vector>
 #include "Activity.h"
+#include "../exception/IntervalAlreadyOccupied.h"
 
 class DayActivities {
 

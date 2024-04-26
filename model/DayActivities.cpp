@@ -1,7 +1,3 @@
-//
-// Created by Arturo Viti on 26/04/24.
-//
-
 #include "DayActivities.h"
 
 const QDate &DayActivities::getDateDay() const {
@@ -22,5 +18,5 @@ void DayActivities::addActivity( const Activity &activity ) {
     if ( it != activities.end() )
         this->activities.push_back( activity );
     else
-
+        throw IntervalAlreadyOccupied();
 }
