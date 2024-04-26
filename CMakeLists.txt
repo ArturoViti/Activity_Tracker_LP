@@ -14,7 +14,22 @@ find_package(Qt6 COMPONENTS
         Widgets
         REQUIRED)
 add_library(core ${SOURCE_FILES})
-add_executable(Activity_Tracker_LP main.cpp)
+add_executable(Activity_Tracker_LP main.cpp
+        model/ActivityVote.h
+        model/SportActivityType.h
+        model/Tag.cpp
+        model/Tag.h
+        model/Place.cpp
+        model/Place.h
+        model/Activity.cpp
+        model/Activity.h
+        model/DayActivities.cpp
+        model/DayActivities.h
+        model/SportActivity.cpp
+        model/SportActivity.h
+        exception/WrongIntervalException.cpp
+        exception/WrongIntervalException.h
+)
 target_link_libraries(Activity_Tracker_LP
         Qt::Core
         Qt::Gui
