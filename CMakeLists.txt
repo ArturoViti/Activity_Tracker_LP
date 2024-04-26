@@ -27,6 +27,8 @@ add_executable(Activity_Tracker_LP main.cpp
         model/DayActivities.h
         exception/WrongIntervalException.cpp
         exception/WrongIntervalException.h
+        exception/IntervalAlreadyOccupied.cpp
+        exception/IntervalAlreadyOccupied.h
 )
 target_link_libraries(Activity_Tracker_LP
         Qt::Core

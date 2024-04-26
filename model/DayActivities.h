@@ -12,7 +12,9 @@ private:
     std::vector<Activity> activities;
 
 public:
-    DayActivities( vector<Activity> &activities, QDate day=QDate::currentDate() ): dateDay(day), activities(activities) { };
+    DayActivities( const vector<Activity> &activities, const QDate &day=QDate::currentDate() ):
+        dateDay(day), activities(activities) { };
+
     DayActivities( const DayActivities &sourceDay ) : activities(sourceDay.activities), dateDay(sourceDay.dateDay) { };
 
     inline DayActivities operator=( const DayActivities &rDay ) {
@@ -22,6 +24,7 @@ public:
         return *this;
     }
 
+    void addActivity( const Activity &activity );
     const QDate &getDateDay() const;
     void setDateDay(const QDate &dateDay);
 
