@@ -16,6 +16,6 @@ QColor *Tag::getColor() const {
     return color;
 }
 
-void Tag::setColor( QColor *color ) {
-    Tag::color = color;
+void Tag::setColor( QColor &color ) {
+    Tag::color = &color;
 }
