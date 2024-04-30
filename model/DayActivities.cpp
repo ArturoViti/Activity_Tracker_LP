@@ -24,8 +24,8 @@ void DayActivities::addActivity( const Activity &activity ) {
 
 void DayActivities::removeActivity( const Activity &activity ) {
     auto it = find_if( activities.begin(), activities.end(),
-    [&activity] (const Activity &temp) {
-            return temp == activity;
+    [&activity] ( const Activity &temp ) {
+            return ( &activity == &temp );
         }
     );
 

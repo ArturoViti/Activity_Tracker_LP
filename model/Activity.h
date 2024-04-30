@@ -62,7 +62,7 @@ class Activity {
             return *this;
         }
 
-        bool operator==( const Activity &rActivity );
+        inline bool operator==( const Activity &rActivity );
 
         virtual ~Activity() {
             tags.clear();

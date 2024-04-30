@@ -32,6 +32,8 @@ add_executable(Activity_Tracker_LP main.cpp
         config.h
         view/DayActivitiesView.cpp
         view/DayActivitiesView.h
+        view/MainWindowView.cpp
+        view/MainWindowView.h
 )
 target_link_libraries(Activity_Tracker_LP
         Qt::Core

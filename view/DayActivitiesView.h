@@ -4,39 +4,30 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QDateEdit>
+#include <QCalendarWidget>
 #include <QPushButton>
 #include <QWidget>
+#include "MainWindowView.h"
 
-class DayActivitiesView : public QWidget {
+class DayActivitiesView : public MainWindowView {
+    private:
+        QCalendarWidget *calendar;
 
-public:
-    explicit DayActivitiesView(QWidget *parent = nullptr) : QWidget(parent) {
-        setupUI();
-    }
+        inline void updateCalendarWidth() {
+            calendar->setFixedWidth(width() / 2);
+        }
 
-private:
-    void onGoToDayClicked() {
-        //goToDayClicked(dateEdit->date());
-    }
-
-private:
-    QDateEdit *dateEdit;
-    QPushButton *goToDayButton;
-
-    void setupUI() {
-        QVBoxLayout *mainLayout = new QVBoxLayout(this);
-        QHBoxLayout *layout = new QHBoxLayout;
-
-        dateEdit = new QDateEdit(this);
-        layout->addWidget(dateEdit);
+        void setupUI();
 
 
-        goToDayButton = new QPushButton("Vai al Giorno", this);
-        connect(goToDayButton, &QPushButton::clicked, this, &DayActivitiesView::onGoToDayClicked);
-        layout->addWidget(goToDayButton);
+    protected:
+        void resizeEvent( QResizeEvent *event ) override;
 
-        mainLayout->addLayout(layout);
-    }
-};
+
+    public:
+        explicit DayActivitiesView( QWidget *parent = nullptr ) : MainWindowView(parent) {
+            setupUI();
+        }
+    };
 
 #endif //ACTIVITY_TRACKER_LP_DAYACTIVITIESVIEW_H
