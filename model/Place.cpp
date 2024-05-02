@@ -19,3 +19,7 @@ void Place::setName( const std::string &name ) {
 Place::~Place() {
 
 }
+
+std::string Place::serializePlace() {
+    return name + " - " + location;
+}

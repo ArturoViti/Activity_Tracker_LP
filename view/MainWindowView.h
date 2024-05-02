@@ -7,8 +7,9 @@
 
 class MainWindowView : public QWidget {
     public:
-        explicit MainWindowView( QWidget *parent = nullptr ) : QWidget(parent) {
-            resize(WIDTH_SCREEN_SIZE, HEIGHT_SCREEN_SIZE);
+        explicit MainWindowView( QWidget *parent = nullptr, int width = WIDTH_SCREEN_SIZE,
+                int height = HEIGHT_SCREEN_SIZE  ) : QWidget(parent) {
+            resize(width, height);
         }
 
 };

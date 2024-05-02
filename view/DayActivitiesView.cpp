@@ -10,7 +10,7 @@ void DayActivitiesView::setupUI() {
     mainLayout->setAlignment(Qt::AlignLeft);
     activityLayout->setAlignment(Qt::AlignTop);
 
-    QPushButton *button = new QPushButton("Inserisci una nuova attività");
+    button = new QPushButton("Inserisci una nuova attività");
 
     calendar = new QCalendarWidget;
     calendar->setFirstDayOfWeek(Qt::Monday);

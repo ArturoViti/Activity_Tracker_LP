@@ -24,6 +24,7 @@ class Place {
         void setLocation( const std::string &location );
         const std::string &getName() const;
         void setName( const std::string &name );
+        std::string serializePlace();
 };
 
 
