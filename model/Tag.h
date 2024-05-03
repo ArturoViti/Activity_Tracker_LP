@@ -8,11 +8,11 @@
 class Tag {
     private:
         std::string name;
-        QColor *color;
+        QColor color;
 
 
     public:
-            explicit Tag( std::string name, QColor &color ) : name(name), color(&color) { };
+            explicit Tag( std::string name, const QColor &color ) : name(name), color(color) { };
 
             Tag( const Tag& that ) : name(that.name), color(that.color) { }
 
@@ -25,8 +25,6 @@ class Tag {
             inline bool operator==( const Tag &rTag ) {
                 return ( name == rTag.name && color == rTag.color );
             }
-
-            virtual ~Tag();
 
             const std::string &getName() const;
             void setName( const std::string &name );

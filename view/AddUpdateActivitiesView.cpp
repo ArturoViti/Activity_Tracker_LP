@@ -1,14 +1,5 @@
-#include <QFormLayout>
-#include <QLineEdit>
-#include <QTextEdit>
-#include <QComboBox>
-#include <QButtonGroup>
-#include <QLabel>
-#include <QCheckBox>
-#include "../model/ActivityVote.h"
 #include "AddUpdateActivitiesView.h"
-#include "../model/Tag.h"
-#include "../model/Place.h"
+#include "../model/Activity.h"
 
 void AddUpdateActivitiesView::setupUI() {
     // Impostazione Layout
@@ -18,22 +9,22 @@ void AddUpdateActivitiesView::setupUI() {
     QGridLayout *layout = new QGridLayout(this);
 
     // Nome
-    QLineEdit *activityName = new QLineEdit(this);
+    activityName = new QLineEdit(this);
 
     // Descrizione
-    QLineEdit *activityDescription = new QLineEdit(this);
+    activityDescription = new QLineEdit(this);
 
     // Voto
-    QComboBox *ratingComboBox = new QComboBox(this);
+    ratingComboBox = new QComboBox(this);
     for ( const auto& pair : ActivityRatings )
-        ratingComboBox->addItem( QString::fromStdString(pair.second) );
+        ratingComboBox->addItem( QString::fromStdString(pair.first) );
 
     // Campo Tags
     // Generazione dei Tags @TODO: Sposta Complessità Altrove
     Tag *tag1 = new Tag( "Formazione", *(new QColor(Qt::blue)) );
     Tag *tag2 = new Tag( "Università", *(new QColor(Qt::darkGreen)) );
     Tag *tag3 = new Tag( "Lavoro", *(new QColor(Qt::red)) );
-    QButtonGroup *objectsComboBox = new QButtonGroup(this);
+    objectsComboBox = new QButtonGroup(this);
     objectsComboBox->setExclusive(false);
     QCheckBox *checkbox1 = new QCheckBox( QString::fromStdString(tag1->getName()), this );
     QCheckBox *checkbox2 = new QCheckBox( QString::fromStdString(tag2->getName()), this );
@@ -53,7 +44,7 @@ void AddUpdateActivitiesView::setupUI() {
     objectsComboBox->addButton(checkbox3);
 
     // Campo Luogo (select)
-    QComboBox *locationComboBox = new QComboBox(this);
+    locationComboBox = new QComboBox(this);
     // Generazione dei Luoghi
     Place *place1 = new Place( "UniFi", "Centro Didattico Morgagni");
     Place *place2 = new Place( "Azienda", "Zona Santa Maria Novella Firenze");
@@ -61,13 +52,13 @@ void AddUpdateActivitiesView::setupUI() {
     locationComboBox->addItem( QString::fromStdString( place2->serializePlace() ) );
 
     // Campo Ora Inizio
-    QTimeEdit *startTimeEdit = new QTimeEdit(this);
+    startTimeEdit = new QTimeEdit(this);
 
     // Campo Ora Fine
-    QTimeEdit *endTimeEdit = new QTimeEdit(this);
+    endTimeEdit = new QTimeEdit(this);
 
     // Campo Data
-    QDateEdit *dateEdit = new QDateEdit( QDate::currentDate() );
+    dateEdit = new QDateEdit( QDate::currentDate() );
 
     // Pulsante di Salvataggio
     saveActivityButton = new QPushButton( "Salva Attività");
@@ -105,4 +96,51 @@ void AddUpdateActivitiesView::setupUI() {
     formContainer->addLayout(tagsLayout);
     formContainer->addWidget(saveActivityButton);
     setLayout(formContainer);
+}
+
+void AddUpdateActivitiesView::saveActivityFromView() {
+    // Recupero dei tag
+    std::vector<Tag> tags;
+    QList<QAbstractButton*> buttonList = objectsComboBox->buttons();
+    for ( auto it = buttonList.cbegin(); it!=buttonList.cend(); ++it)
+    {
+        if ( (*it)->isChecked() )
+        {
+            Tag tempTag =  Tag( (*it)->text().toStdString(), (*it)->palette().color(QPalette::WindowText) );
+            tags.push_back(tempTag);
+        }
+    }
+
+    // Recupero di Place
+    Place tempPlace =  Place( locationComboBox->currentText().toStdString(), '-' );
+
+    // Recupero dell'enumerato
+    ActivityVote currentVote = ActivityRatings.at( ratingComboBox->currentText().toStdString() );
+
+    // Recupero delle date
+    QTime startTime = startTimeEdit->time();
+    QTime endTime = endTimeEdit->time();
+
+    Activity *activity;
+
+    try
+    {
+        activity = new Activity( activityName->text().toStdString(), startTime, endTime,
+                                           tags, tempPlace, activityDescription->text().toStdString(), currentVote );
+        std::cout << activity->getName();
+    }
+    catch ( const WrongIntervalException &wie )
+    {
+        std::cout << "err";
+    }
+    catch ( const IntervalAlreadyOccupied &iao )
+    {
+        std::cout << "occupato";
+    }
+    catch ( ... )
+    {
+        std::cout << "Errore Generico";
+    }
+
+
 }

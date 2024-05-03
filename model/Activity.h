@@ -34,9 +34,9 @@ class Activity {
                 name(name), description(desc), vote(vote), place(&place), tags(tags) {
             try
             {
-                checkInterval( start, end );
                 this->start = &start;
                 this->end = &end;
+                checkInterval( start, end );
             }
             catch ( const WrongIntervalException& ex )
             {

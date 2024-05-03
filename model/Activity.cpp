@@ -53,7 +53,7 @@ void Activity::setStart( QTime &start ) {
 }
 
 void Activity::checkInterval( const QTime &start, const QTime &end ) {
-    if ( start > end || start < end )
+    if ( start >= end )
         throw WrongIntervalException();
 }
 

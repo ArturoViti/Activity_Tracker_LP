@@ -10,11 +10,11 @@ enum class ActivityVote {
     VERY_GOOD = 2
 };
 
-const std::map<ActivityVote, std::string> ActivityRatings = {
-    { ActivityVote::NONE, "Nessuna" },
-    { ActivityVote::BAD, "Pessima" },
-    { ActivityVote::GOOD, "Bene" },
-    { ActivityVote::VERY_GOOD, "Molto Bene" }
+const std::map<std::string, ActivityVote> ActivityRatings = {
+    { "Nessuna", ActivityVote::NONE },
+    { "Pessima", ActivityVote::BAD },
+    { "Bene", ActivityVote::GOOD },
+    { "Molto Bene", ActivityVote::VERY_GOOD }
 };
 
 #endif
