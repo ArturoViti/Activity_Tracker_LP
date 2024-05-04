@@ -36,16 +36,16 @@ void Activity::setPlace( Place &place ) {
     Activity::place = &place;
 }
 
-QTime *Activity::getAnEnd() const {
-    return end;
+QTime &Activity::getAnEnd() const {
+    return *end;
 }
 
 void Activity::setAnEnd( QTime &anEnd ) {
     end = &anEnd;
 }
 
-QTime *Activity::getStart() const {
-    return start;
+QTime &Activity::getStart() const {
+    return *start;
 }
 
 void Activity::setStart( QTime &start ) {

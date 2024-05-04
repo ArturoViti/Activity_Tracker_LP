@@ -4,7 +4,7 @@
 #include<QDate>
 #include<vector>
 #include "Activity.h"
-#include "../exception/IntervalAlreadyOccupied.h"
+#include "../exception/IntervalAlreadyOccupiedException.h"
 
 class DayActivities {
 
@@ -28,6 +28,7 @@ class DayActivities {
 
         void addActivity( const Activity &activity );
         void removeActivity( const Activity &activity );
+        int getNumOfActivities();
         const QDate &getDateDay() const;
         void setDateDay( const QDate &dateDay );
 

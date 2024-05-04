@@ -25,8 +25,8 @@ set( SOURCE_FILES
     model/DayActivities.h
     exception/WrongIntervalException.cpp
     exception/WrongIntervalException.h
-    exception/IntervalAlreadyOccupied.cpp
-    exception/IntervalAlreadyOccupied.h
+        exception/IntervalAlreadyOccupiedException.cpp
+        exception/IntervalAlreadyOccupiedException.h
     config.h
     view/DayActivitiesView.cpp
     view/DayActivitiesView.h

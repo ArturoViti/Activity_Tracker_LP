@@ -18,7 +18,7 @@
 #include "../model/Tag.h"
 #include "../model/Place.h"
 #include "MainWindowView.h"
-#include "../exception/IntervalAlreadyOccupied.h"
+#include "../exception/IntervalAlreadyOccupiedException.h"
 
 class AddUpdateActivitiesView : public MainWindowView {
     private:

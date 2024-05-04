@@ -32,7 +32,7 @@ class Activity {
     public:
         Activity( string name, QTime &start, QTime &end, const vector<Tag> &tags, Place &place, string desc="",
                   ActivityVote vote=ActivityVote::NONE ):
-                  name(name), description(desc), vote(vote), place(&place), tags(tags) {
+                  name(name), description(desc), vote(vote), tags(tags), place(&place) {
             try
             {
                 this->start = &start;
@@ -48,8 +48,8 @@ class Activity {
 
         Activity( const Activity &sourceActivity ) :
             name(sourceActivity.name), description(sourceActivity.description), vote(sourceActivity.vote),
-            place(sourceActivity.place), start(sourceActivity.start), end(sourceActivity.end),
-            tags(sourceActivity.tags) { }
+            tags(sourceActivity.tags), place(sourceActivity.place), start(sourceActivity.start),
+            end(sourceActivity.end) { }
 
         inline Activity& operator=( const Activity &rActivity ) {
             name = rActivity.name;
@@ -66,10 +66,9 @@ class Activity {
         inline bool operator==( const Activity &rActivity );
 
         virtual ~Activity() {
-            tags.clear();
-            delete place;
-            delete start;
-            delete end;
+            //delete place;
+            //delete start;
+            //delete end;
         }
 
         const string &getName() const;
@@ -88,10 +87,10 @@ class Activity {
         Place *getPlace() const;
         void setPlace( Place &place );
 
-        QTime *getAnEnd() const;
+        QTime &getAnEnd() const;
         void setAnEnd( QTime &anEnd );
 
-        QTime *getStart() const;
+        QTime &getStart() const;
         void setStart( QTime &start );
 };
 

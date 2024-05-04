@@ -133,7 +133,7 @@ void AddUpdateActivitiesView::saveActivityFromView() {
     {
         std::cout << "err";
     }
-    catch ( const IntervalAlreadyOccupied &iao )
+    catch ( const IntervalAlreadyOccupiedException &iao )
     {
         std::cout << "occupato";
     }
