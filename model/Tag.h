@@ -2,8 +2,7 @@
 #define ACTIVITY_TRACKER_LP_TAG_H
 
 #include<iostream>
-#include<Qt>
-#include <QColor>
+#include<QColor>
 
 class Tag {
     private:

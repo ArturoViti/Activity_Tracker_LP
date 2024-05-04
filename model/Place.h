@@ -23,9 +23,6 @@ class Place {
             return *this;
         }
 
-        virtual ~Place();
-
-
         const std::string &getLocation() const;
         void setLocation( const std::string &location );
         const std::string &getName() const;

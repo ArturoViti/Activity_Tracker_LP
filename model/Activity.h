@@ -25,13 +25,14 @@ class Activity {
         QTime *start;
         QTime *end;
 
-        inline virtual void checkIntervalValues( const QTime &start, const QTime &end ) {
+        /*inline virtual void checkIntervalValues( const QTime &start, const QTime &end ) {
             checkInterval( start, end );
-        }
+        }*/
 
     public:
-        Activity( string name, QTime &start, QTime &end, const vector<Tag> &tags, Place &place, string desc="", ActivityVote vote=ActivityVote::NONE ):
-                name(name), description(desc), vote(vote), place(&place), tags(tags) {
+        Activity( string name, QTime &start, QTime &end, const vector<Tag> &tags, Place &place, string desc="",
+                  ActivityVote vote=ActivityVote::NONE ):
+                  name(name), description(desc), vote(vote), place(&place), tags(tags) {
             try
             {
                 this->start = &start;
