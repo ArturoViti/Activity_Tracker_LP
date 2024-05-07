@@ -35,6 +35,11 @@ set( SOURCE_FILES
     view/AddUpdateActivitiesView.cpp
     view/AddUpdateActivitiesView.h
     view/AddUpdateActivitiesView.h
+        model/Observer.h
+        model/Observer.h
+        model/Subject.h
+        controller/DayActivitiesController.cpp
+        controller/DayActivitiesController.h
 )
 
 add_executable(Activity_Tracker_LP main.cpp)

@@ -11,6 +11,7 @@
 #include "AddUpdateActivitiesView.h"
 
 class DayActivitiesView : public MainWindowView {
+
     private:
         QCalendarWidget *calendar;
         QPushButton *button;
@@ -39,6 +40,7 @@ class DayActivitiesView : public MainWindowView {
             connect( button, &QPushButton::clicked, this,
                      &DayActivitiesView::openAddUpdateActivityWindow );
         }
+
 };
 
 #endif //ACTIVITY_TRACKER_LP_DAYACTIVITIESVIEW_H

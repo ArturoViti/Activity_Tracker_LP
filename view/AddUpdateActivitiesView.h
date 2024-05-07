@@ -17,10 +17,13 @@
 #include "../model/ActivityVote.h"
 #include "../model/Tag.h"
 #include "../model/Place.h"
+#include "../model/DayActivities.h"
+#include "../controller/DayActivitiesController.h"
 #include "MainWindowView.h"
 #include "../exception/IntervalAlreadyOccupiedException.h"
 
-class AddUpdateActivitiesView : public MainWindowView {
+class AddUpdateActivitiesView : public MainWindowView, public Observer {
+
     private:
         QPushButton *saveActivityButton;
         QLineEdit *activityName;
@@ -31,6 +34,9 @@ class AddUpdateActivitiesView : public MainWindowView {
         QTimeEdit *startTimeEdit;
         QTimeEdit *endTimeEdit;
         QDateEdit *dateEdit;
+
+        DayActivities *model;
+        DayActivitiesController *controller;
 
         void setupUI();
 
@@ -44,6 +50,7 @@ class AddUpdateActivitiesView : public MainWindowView {
             connect( saveActivityButton, &QPushButton::clicked, this,
                      &AddUpdateActivitiesView::saveActivityFromView );
         }
+
 };
 
 

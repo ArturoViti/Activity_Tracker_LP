@@ -24,5 +24,4 @@ TEST( Activity, MainConstructorIntervalException ) {
     QTime end = QTime( 0 ,30);
     Place place = Place( "Morgagni", "Viale Morgagni" );
     ASSERT_THROW( new Activity(name, start, end, tags, place, desc, ActivityVote::GOOD), WrongIntervalException );
-
 }
