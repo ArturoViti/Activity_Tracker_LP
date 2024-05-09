@@ -3,6 +3,7 @@
 
 
 #include <QWidget>
+#include <QObject>
 #include "../config.h"
 
 class MainWindowView : public QWidget {

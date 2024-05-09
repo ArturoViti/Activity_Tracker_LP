@@ -8,8 +8,8 @@ class Place {
         std::string name;
 
     public:
-        explicit Place( std::string name, std::string location="" ) : name(name), location(location) { }
-        Place( const Place& that ) : name(that.name), location(that.location) { }
+        explicit Place( std::string name, std::string location="" ) : location(location), name(name) { }
+        Place( const Place& that ) : location(that.location), name(that.name) { }
         explicit Place( std::string nameWithLocation, char separator='-' ) {
             size_t pos = nameWithLocation.find(separator);
 

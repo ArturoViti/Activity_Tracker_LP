@@ -23,20 +23,8 @@ void DayActivities::setDateDay( const QDate &dateDay ) {
 }
 
 void DayActivities::addActivity( const Activity &activity ) {
-    auto it = find_if( activities.begin(), activities.end(),
-       [&activity] (const Activity &temp) {
-                return ( (activity.getStart() < temp.getAnEnd()) || (activity.getAnEnd() < temp.getStart()) );
-            }
-    );
-
-    if ( it != activities.end() )
-        throw IntervalAlreadyOccupiedException();
-    else
-    {
-        this->activities.push_back( activity );
-        notify();
-    }
-
+    this->activities.push_back( activity );
+    notify();
 }
 
 void DayActivities::removeActivity( const Activity &activity ) {
@@ -56,6 +44,10 @@ void DayActivities::removeActivity( const Activity &activity ) {
 
 int DayActivities::getNumOfActivities() {
     return activities.size();
+}
+
+const vector<Activity> &DayActivities::getActivities() const {
+    return activities;
 }
 
 

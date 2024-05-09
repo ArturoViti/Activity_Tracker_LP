@@ -72,13 +72,9 @@ void AddUpdateActivitiesView::setupUI() {
     layout->addWidget(new QLabel("Voto:"), 2, 0);
     layout->addWidget(ratingComboBox, 2, 1);
 
-    int i = 0;
     QList<QAbstractButton*> buttonList = objectsComboBox->buttons();
-    for ( auto it = buttonList.cbegin(); it!=buttonList.cend(); ++it)
-    {
+    for ( auto it = buttonList.cbegin(); it!=buttonList.cend(); ++it )
         tagsLayout->addWidget(*it);
-        i++;
-    }
 
     layout->addWidget(new QLabel("Luogo:"), 3, 0);
     layout->addWidget(locationComboBox, 3, 1);
@@ -126,8 +122,9 @@ void AddUpdateActivitiesView::saveActivityFromView() {
     try
     {
         activity = new Activity( activityName->text().toStdString(), startTime, endTime,
-                                           tags, tempPlace, activityDescription->text().toStdString(), currentVote );
-        std::cout << activity->getName();
+            tags, tempPlace, activityDescription->text().toStdString(), currentVote );
+        controller->addActivity( *activity );
+        emit activitySaved();
     }
     catch ( const WrongIntervalException &wie )
     {

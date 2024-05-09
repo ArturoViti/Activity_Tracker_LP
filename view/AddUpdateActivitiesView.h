@@ -14,6 +14,7 @@
 #include <QButtonGroup>
 #include <QLabel>
 #include <QCheckBox>
+#include <QObject>
 #include "../model/ActivityVote.h"
 #include "../model/Tag.h"
 #include "../model/Place.h"
@@ -23,7 +24,6 @@
 #include "../exception/IntervalAlreadyOccupiedException.h"
 
 class AddUpdateActivitiesView : public MainWindowView, public Observer {
-
     private:
         QPushButton *saveActivityButton;
         QLineEdit *activityName;
@@ -44,13 +44,30 @@ class AddUpdateActivitiesView : public MainWindowView, public Observer {
         void saveActivityFromView();
 
     public:
-        explicit AddUpdateActivitiesView( QWidget *parent = nullptr, int width = WIDTH_SCREEN_SIZE / 2,
+        explicit AddUpdateActivitiesView( DayActivities *model, DayActivitiesController *controller,
+                QWidget *parent = nullptr, int width = WIDTH_SCREEN_SIZE / 2,
                 int height = HEIGHT_SCREEN_SIZE / 2 ) : MainWindowView(parent, width, height ) {
+
+            this->model = model;
+            model->addObserver(this);
+
+            this->controller = controller;
+
             setupUI();
             connect( saveActivityButton, &QPushButton::clicked, this,
                      &AddUpdateActivitiesView::saveActivityFromView );
         }
 
+        inline virtual ~AddUpdateActivitiesView() {
+            model->removeObserver(this);
+        }
+
+        inline virtual void update() override {
+            std::cout << "update" << std::endl;
+        }
+
+    signals:
+        void activitySaved() { cout << "salvato"; };
 };
 
 

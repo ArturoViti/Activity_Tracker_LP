@@ -14,6 +14,7 @@ class DayActivitiesController {
 
         void addActivity( const Activity &activity );
         void removeActivity( const Activity &activity );
+        const vector<Activity> &getActivities() const;
 
 };
 

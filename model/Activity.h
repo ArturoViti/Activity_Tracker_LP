@@ -22,12 +22,8 @@ class Activity {
         ActivityVote vote;
         vector<Tag> tags;
         Place *place;
-        QTime *start;
-        QTime *end;
-
-        /*inline virtual void checkIntervalValues( const QTime &start, const QTime &end ) {
-            checkInterval( start, end );
-        }*/
+        QTime start;
+        QTime end;
 
     public:
         Activity( string name, QTime &start, QTime &end, const vector<Tag> &tags, Place &place, string desc="",
@@ -35,8 +31,8 @@ class Activity {
                   name(name), description(desc), vote(vote), tags(tags), place(&place) {
             try
             {
-                this->start = &start;
-                this->end = &end;
+                this->start = start;
+                this->end = end;
                 checkInterval( start, end );
             }
             catch ( const WrongIntervalException& ex )
@@ -87,10 +83,10 @@ class Activity {
         Place *getPlace() const;
         void setPlace( Place &place );
 
-        QTime &getAnEnd() const;
+        QTime getAnEnd() const;
         void setAnEnd( QTime &anEnd );
 
-        QTime &getStart() const;
+        QTime getStart() const;
         void setStart( QTime &start );
 };
 

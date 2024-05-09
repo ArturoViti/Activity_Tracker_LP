@@ -40,6 +40,8 @@ set( SOURCE_FILES
         model/Subject.h
         controller/DayActivitiesController.cpp
         controller/DayActivitiesController.h
+        view/ListActivitiesTemplate.cpp
+        view/ListActivitiesTemplate.h
 )
 
 add_executable(Activity_Tracker_LP main.cpp)
