@@ -65,9 +65,6 @@ class AddUpdateActivitiesView : public MainWindowView, public Observer {
         inline virtual void update() override {
             std::cout << "update" << std::endl;
         }
-
-    signals:
-        void activitySaved() { cout << "salvato"; };
 };
 
 

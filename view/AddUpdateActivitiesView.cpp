@@ -124,7 +124,7 @@ void AddUpdateActivitiesView::saveActivityFromView() {
         activity = new Activity( activityName->text().toStdString(), startTime, endTime,
             tags, tempPlace, activityDescription->text().toStdString(), currentVote );
         controller->addActivity( *activity );
-        emit activitySaved();
+        //emit this->activitySaved();
     }
     catch ( const WrongIntervalException &wie )
     {

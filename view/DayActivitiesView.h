@@ -9,12 +9,13 @@
 #include <QWidget>
 #include <QStandardItem>
 #include <QListView>
+#include <QObject>
+#include <QListWidget>
 #include "MainWindowView.h"
 #include "AddUpdateActivitiesView.h"
-#include "ListActivitiesTemplate.h"
 
 class DayActivitiesView : public MainWindowView, public Observer {
-
+    Q_OBJECT
     private:
         QHBoxLayout *mainLayout;
         QVBoxLayout *calendarButtonLayout;
@@ -22,12 +23,12 @@ class DayActivitiesView : public MainWindowView, public Observer {
 
         QCalendarWidget *calendar;
         QPushButton *button;
-        QListView *listView;
-        ListActivitiesTemplate *listActivitiesTemplate;
+        QListWidget *listView;
 
         AddUpdateActivitiesView *addUpdateActivityWindow;
         DayActivities *model;
         DayActivitiesController *controller;
+        QList<Activity> activitiesToView;
 
         inline void updateCalendarWidth() {
             calendar->setFixedWidth(width() / 2);
@@ -35,17 +36,11 @@ class DayActivitiesView : public MainWindowView, public Observer {
 
         void setupUI();
 
+
     private slots:
         void openAddUpdateActivityWindow() {
-            addUpdateActivityWindow = new AddUpdateActivitiesView( model, controller );
             addUpdateActivityWindow->show();
         }
-
-        void updateListView() {
-            this->update();
-        }
-
-
     protected:
         void resizeEvent( QResizeEvent *event ) override;
 
@@ -61,9 +56,6 @@ class DayActivitiesView : public MainWindowView, public Observer {
 
             connect( button, &QPushButton::clicked, this,
                      &DayActivitiesView::openAddUpdateActivityWindow );
-
-            //connect(addUpdateActivityWindow, &AddUpdateActivitiesView::activitySaved, this, &DayActivitiesView::updateListView);
-
         }
 
         virtual ~DayActivitiesView() {

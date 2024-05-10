@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 project(Activity_Tracker_LP)
 
+set(CMAKE_AUTOMOC ON)                   #crea i file _moc ogni volta che incontra la macro Q_OBJECT
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOUIC ON)                   #aggiunge il file ui per la creazione della finestra interattiva
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
@@ -40,13 +44,14 @@ set( SOURCE_FILES
         model/Subject.h
         controller/DayActivitiesController.cpp
         controller/DayActivitiesController.h
-        view/ListActivitiesTemplate.cpp
-        view/ListActivitiesTemplate.h
+        view/ActivityItemWidgetDelegate.cpp
+        view/ActivityItemWidgetDelegate.h
 )
 
 add_executable(Activity_Tracker_LP main.cpp)
 add_library(core ${SOURCE_FILES})
 
+set_target_properties(${PROJECT_NAME} PROPERTIES AUTOMOC TRUE)
 target_link_libraries(Activity_Tracker_LP core)
 target_link_libraries(Activity_Tracker_LP Qt::Core Qt::Gui Qt::Widgets )
 

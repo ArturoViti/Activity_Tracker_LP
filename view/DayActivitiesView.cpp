@@ -1,6 +1,7 @@
 #include <QFrame>
 #include <QLabel>
 #include "DayActivitiesView.h"
+#include "ActivityItemWidgetDelegate.h"
 
 void DayActivitiesView::setupUI() {
     mainLayout = new QHBoxLayout(this);
@@ -28,16 +29,22 @@ void DayActivitiesView::setupUI() {
     label->setText("Le tue Attività");
     label->setAlignment( Qt::AlignBottom | Qt::AlignCenter );
     activityLayout->addWidget(label);
-    listView = new QListView;
-    listActivitiesTemplate = new ListActivitiesTemplate;
-    listView->setModel( listActivitiesTemplate );
+
+
+    vector<Activity> temp = model->getActivities();
+    activitiesToView.reserve(temp.size());
+    std::copy(temp.begin(), temp.end(), std::back_inserter(activitiesToView));
+    listView = new QListWidget;
     activityLayout->addWidget(listView);
+
 
     // Collegamento
     calendarButtonLayout->addWidget(button);
     calendarButtonLayout->addWidget(calendar);
     mainLayout->addLayout(calendarButtonLayout);
     mainLayout->addLayout(activityLayout);
+
+    addUpdateActivityWindow = new AddUpdateActivitiesView( model, controller );
 }
 
 void DayActivitiesView::resizeEvent( QResizeEvent *event )  {
@@ -46,8 +53,16 @@ void DayActivitiesView::resizeEvent( QResizeEvent *event )  {
 }
 
 void DayActivitiesView::update() {
-    // @FIXME: non si aggiorna la lista
-    listActivitiesTemplate->addItem( controller->getActivities().front() );
-    setLayout(activityLayout);
+    cout << "Evento!" << endl;
+
+    Activity newActivity = model->getActivities().back();
+    QListWidgetItem *item = new QListWidgetItem(listView);
+    QWidget *widget = ActivityItemWidgetDelegate::createRow(
+        QString::fromStdString(newActivity.getName()), newActivity.getStart(),
+        newActivity.getAnEnd()
+    );
+    item->setSizeHint(QSize(0, HEIGHT_ROW_CONTAINER_HEIGHT) );
+    listView->addItem(item);
+    listView->setItemWidget(item, widget);
 }
 
