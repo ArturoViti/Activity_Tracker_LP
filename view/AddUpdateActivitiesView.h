@@ -23,7 +23,7 @@
 #include "MainWindowView.h"
 #include "../exception/IntervalAlreadyOccupiedException.h"
 
-class AddUpdateActivitiesView : public MainWindowView, public Observer {
+class AddUpdateActivitiesView : public MainWindowView {
     private:
         QPushButton *saveActivityButton;
         QLineEdit *activityName;
@@ -49,8 +49,6 @@ class AddUpdateActivitiesView : public MainWindowView, public Observer {
                 int height = HEIGHT_SCREEN_SIZE / 2 ) : MainWindowView(parent, width, height ) {
 
             this->model = model;
-            model->addObserver(this);
-
             this->controller = controller;
 
             setupUI();
@@ -58,13 +56,7 @@ class AddUpdateActivitiesView : public MainWindowView, public Observer {
                      &AddUpdateActivitiesView::saveActivityFromView );
         }
 
-        inline virtual ~AddUpdateActivitiesView() {
-            model->removeObserver(this);
-        }
-
-        inline virtual void update() override {
-            std::cout << "update" << std::endl;
-        }
+        virtual ~AddUpdateActivitiesView();
 };
 
 

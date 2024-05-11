@@ -13,6 +13,11 @@ void DayActivities::notify() {
         observer->update();
 }
 
+void DayActivities::notifyDelete() {
+    for ( Observer* observer : observers )
+        observer->updateOnDelete();
+}
+
 const QDate &DayActivities::getDateDay() const {
     return dateDay;
 }
@@ -37,7 +42,7 @@ void DayActivities::removeActivity( const Activity &activity ) {
     if ( it != activities.end() )
     {
         this->activities.erase( it );
-        notify();
+        notifyDelete();
     }
 
 }
@@ -49,5 +54,7 @@ int DayActivities::getNumOfActivities() {
 const vector<Activity> &DayActivities::getActivities() const {
     return activities;
 }
+
+
 
 

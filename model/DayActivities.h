@@ -31,6 +31,7 @@ class DayActivities  : public Subject {
         virtual void addObserver( Observer *o ) override;
         virtual void removeObserver( Observer *o ) override;
         virtual void notify() override;
+        virtual void notifyDelete() override;
 
         void addActivity( const Activity &activity );
         void removeActivity( const Activity &activity );

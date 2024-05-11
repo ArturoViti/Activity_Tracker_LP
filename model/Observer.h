@@ -7,6 +7,8 @@ class Observer {
         virtual ~Observer() { }
 
         virtual void update() = 0;
+
+        virtual void updateOnDelete() = 0;
 };
 
 #endif //ACTIVITY_TRACKER_LP_OBSERVER_H

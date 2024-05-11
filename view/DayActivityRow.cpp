@@ -13,8 +13,10 @@ DayActivityRow::DayActivityRow( const Activity &activity ) {
 
     openButton = new QPushButton("Apri");
     deleteButton = new QPushButton("Elimina");
-    /*connect( deleteButton, &QPushButton::clicked, this,
-             std::bind(&DayActivitiesView::deleteActivity, this, newActivity));*/
+
+    QObject::connect(deleteButton, &QPushButton::clicked, [=]() {
+        // @TODO: segnala
+    });
 
     layout->addWidget(labelActivity);
     layout->addWidget(labelStartEndActivity);
@@ -27,4 +29,8 @@ DayActivityRow::DayActivityRow( const Activity &activity ) {
 
 QWidget *DayActivityRow::getWidget() {
     return widget;
+}
+
+QPushButton *DayActivityRow::getDeleteButton() const {
+    return deleteButton;
 }

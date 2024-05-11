@@ -53,5 +53,14 @@ void DayActivitiesView::update() {
     DayActivityRow *item = new DayActivityRow(newActivity);
     listView->addItem(item);
     listView->setItemWidget( item, item->getWidget() );
+
+}
+
+void DayActivitiesView::deleteActivity( const Activity &activity ) {
+    controller->removeActivity(activity);
+}
+
+void DayActivitiesView::updateOnDelete() {
+    cout << "Cancello";
 }
 

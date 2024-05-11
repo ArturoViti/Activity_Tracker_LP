@@ -68,6 +68,10 @@ class DayActivitiesView : public MainWindowView, public Observer {
 
 
         virtual void update() override;
+        virtual void updateOnDelete() override;
+
+    public slots:
+        void deleteActivity( const Activity &activity );
 
 };
 

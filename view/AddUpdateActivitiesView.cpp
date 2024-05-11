@@ -141,3 +141,17 @@ void AddUpdateActivitiesView::saveActivityFromView() {
 
 
 }
+
+AddUpdateActivitiesView::~AddUpdateActivitiesView() {
+    delete saveActivityButton;
+    delete activityName;
+    delete activityDescription;
+    delete ratingComboBox;
+    delete objectsComboBox;
+    delete locationComboBox;
+    delete startTimeEdit;
+    delete endTimeEdit;
+    delete dateEdit;
+    delete model;
+    delete controller;
+}
