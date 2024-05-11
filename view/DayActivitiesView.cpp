@@ -1,7 +1,4 @@
-#include <QFrame>
-#include <QLabel>
 #include "DayActivitiesView.h"
-#include "ActivityItemWidgetDelegate.h"
 
 void DayActivitiesView::setupUI() {
     mainLayout = new QHBoxLayout(this);
@@ -31,10 +28,7 @@ void DayActivitiesView::setupUI() {
     activityLayout->addWidget(label);
 
 
-    vector<Activity> temp = model->getActivities();
-    activitiesToView.reserve(temp.size());
-    std::copy(temp.begin(), temp.end(), std::back_inserter(activitiesToView));
-    listView = new QListWidget;
+    listView = new DayActivitiesList;
     activityLayout->addWidget(listView);
 
 
@@ -56,13 +50,8 @@ void DayActivitiesView::update() {
     cout << "Evento!" << endl;
 
     Activity newActivity = model->getActivities().back();
-    QListWidgetItem *item = new QListWidgetItem(listView);
-    QWidget *widget = ActivityItemWidgetDelegate::createRow(
-        QString::fromStdString(newActivity.getName()), newActivity.getStart(),
-        newActivity.getAnEnd()
-    );
-    item->setSizeHint(QSize(0, HEIGHT_ROW_CONTAINER_HEIGHT) );
+    DayActivityRow *item = new DayActivityRow(newActivity);
     listView->addItem(item);
-    listView->setItemWidget(item, widget);
+    listView->setItemWidget( item, item->getWidget() );
 }
 

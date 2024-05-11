@@ -11,8 +11,12 @@
 #include <QListView>
 #include <QObject>
 #include <QListWidget>
+#include <QFrame>
+#include <QLabel>
 #include "MainWindowView.h"
 #include "AddUpdateActivitiesView.h"
+#include "DayActivitiesList.h"
+#include "DayActivityRow.h"
 
 class DayActivitiesView : public MainWindowView, public Observer {
     Q_OBJECT
@@ -23,12 +27,11 @@ class DayActivitiesView : public MainWindowView, public Observer {
 
         QCalendarWidget *calendar;
         QPushButton *button;
-        QListWidget *listView;
+        DayActivitiesList *listView;
 
         AddUpdateActivitiesView *addUpdateActivityWindow;
         DayActivities *model;
         DayActivitiesController *controller;
-        QList<Activity> activitiesToView;
 
         inline void updateCalendarWidth() {
             calendar->setFixedWidth(width() / 2);
@@ -41,6 +44,7 @@ class DayActivitiesView : public MainWindowView, public Observer {
         void openAddUpdateActivityWindow() {
             addUpdateActivityWindow->show();
         }
+
     protected:
         void resizeEvent( QResizeEvent *event ) override;
 

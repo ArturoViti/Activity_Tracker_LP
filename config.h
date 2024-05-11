@@ -6,4 +6,5 @@ const int HEIGHT_SCREEN_SIZE = 720;
 
 const int HEIGHT_ROW_CONTAINER_HEIGHT = 60;
 
+const int PADDING_ROW = 10;
 #endif

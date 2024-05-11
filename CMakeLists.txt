@@ -44,8 +44,10 @@ set( SOURCE_FILES
         model/Subject.h
         controller/DayActivitiesController.cpp
         controller/DayActivitiesController.h
-        view/ActivityItemWidgetDelegate.cpp
-        view/ActivityItemWidgetDelegate.h
+        view/DayActivitiesList.cpp
+        view/DayActivitiesList.h
+        view/DayActivityRow.cpp
+        view/DayActivityRow.h
 )
 
 add_executable(Activity_Tracker_LP main.cpp)
