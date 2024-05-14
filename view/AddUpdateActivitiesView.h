@@ -15,6 +15,8 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <QObject>
+#include <QMessageBox>
+
 #include "../model/ActivityVote.h"
 #include "../model/Tag.h"
 #include "../model/Place.h"

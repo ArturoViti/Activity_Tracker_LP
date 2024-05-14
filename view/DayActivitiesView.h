@@ -13,10 +13,15 @@
 #include <QListWidget>
 #include <QFrame>
 #include <QLabel>
+#include <QMessageBox>
+#include <QMessageBox>
+#include <QPixmap>
+
 #include "MainWindowView.h"
 #include "AddUpdateActivitiesView.h"
 #include "DayActivitiesList.h"
 #include "DayActivityRow.h"
+
 
 class DayActivitiesView : public MainWindowView, public Observer {
     Q_OBJECT

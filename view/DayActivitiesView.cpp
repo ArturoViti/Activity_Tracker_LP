@@ -45,8 +45,6 @@ void DayActivitiesView::resizeEvent( QResizeEvent *event )  {
 }
 
 void DayActivitiesView::update() {
-    // @TODO: messaggio di inserimento completato
-
     Activity newActivity = model->getActivities().back();
     DayActivityRow *item = new DayActivityRow(newActivity);
     listView->addItem(item);
@@ -55,17 +53,28 @@ void DayActivitiesView::update() {
     connect(button, &QPushButton::clicked, this, [this, item]() {
         deleteRow(item);
     });
+
+    QMessageBox *msgBox = new QMessageBox;
+    QPixmap *exportSuccess = new QPixmap(QString::fromStdString("../" + SUCCESS_ICON_PATH) );
+    msgBox->setIconPixmap(*exportSuccess);
+    msgBox->setText( QString::fromStdString(SUCCESS_TEXT ) );
+    msgBox->setWindowTitle( QString::fromStdString(SUCCESS_TITLE) );
+    msgBox->addButton( QMessageBox::Ok );
+    msgBox->exec();
 }
 
 void DayActivitiesView::deleteRow( DayActivityRow *item ) {
     controller->removeActivity(item->getActivity());
     delete item;
-    for ( auto i : model->getActivities() )
-        cout << i.getName();
 }
 
 void DayActivitiesView::updateOnDelete() {
-    // @TODO: messaggio di cancellazione completata
-
+    QMessageBox *msgBox = new QMessageBox;
+    QPixmap *exportSuccess = new QPixmap(QString::fromStdString("../" + SUCCESS_DELETE_ICON_PATH) );
+    msgBox->setIconPixmap(*exportSuccess);
+    msgBox->setText( QString::fromStdString(SUCCESS_DELETE_TEXT ) );
+    msgBox->setWindowTitle( QString::fromStdString(SUCCESS_TITLE) );
+    msgBox->addButton( QMessageBox::Ok );
+    msgBox->exec();
 }
 

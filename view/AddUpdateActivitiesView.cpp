@@ -1,5 +1,4 @@
 #include "AddUpdateActivitiesView.h"
-#include "../model/Activity.h"
 
 void AddUpdateActivitiesView::setupUI() {
     // Impostazione Layout
@@ -98,7 +97,7 @@ void AddUpdateActivitiesView::saveActivityFromView() {
     // Recupero dei tag
     std::vector<Tag> tags;
     QList<QAbstractButton*> buttonList = objectsComboBox->buttons();
-    for ( auto it = buttonList.cbegin(); it!=buttonList.cend(); ++it)
+    for ( auto it = buttonList.cbegin(); it != buttonList.cend(); ++it)
     {
         if ( (*it)->isChecked() )
         {
@@ -128,18 +127,34 @@ void AddUpdateActivitiesView::saveActivityFromView() {
     }
     catch ( const WrongIntervalException &wie )
     {
-        std::cout << "err";
+        QMessageBox *msgBox = new QMessageBox;
+        QPixmap *exportSuccess = new QPixmap(QString::fromStdString("../" + ERROR_ICON_PATH) );
+        msgBox->setIconPixmap(*exportSuccess);
+        msgBox->setText( QString::fromStdString(wie.what() ) );
+        msgBox->setWindowTitle( QString::fromStdString(ERROR_TITLE) );
+        msgBox->addButton( QMessageBox::Ok );
+        msgBox->exec();
     }
     catch ( const IntervalAlreadyOccupiedException &iao )
     {
-        std::cout << "occupato";
+        QMessageBox *msgBox = new QMessageBox;
+        QPixmap *exportSuccess = new QPixmap(QString::fromStdString("../" + ERROR_ICON_PATH) );
+        msgBox->setIconPixmap(*exportSuccess);
+        msgBox->setText( QString::fromStdString(iao.what() ) );
+        msgBox->setWindowTitle( QString::fromStdString(ERROR_TITLE) );
+        msgBox->addButton( QMessageBox::Ok );
+        msgBox->exec();
     }
     catch ( ... )
     {
-        std::cout << "Errore Generico";
+        QMessageBox *msgBox = new QMessageBox;
+        QPixmap *exportSuccess = new QPixmap(QString::fromStdString("../" + ERROR_ICON_PATH) );
+        msgBox->setIconPixmap(*exportSuccess);
+        msgBox->setText( QString::fromStdString(ERROR_GENERIC_TEXT) );
+        msgBox->setWindowTitle( QString::fromStdString(ERROR_TITLE) );
+        msgBox->addButton( QMessageBox::Ok );
+        msgBox->exec();
     }
-
-
 }
 
 AddUpdateActivitiesView::~AddUpdateActivitiesView() {
