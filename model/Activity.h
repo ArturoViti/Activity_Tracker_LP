@@ -59,7 +59,7 @@ class Activity {
             return *this;
         }
 
-        inline bool operator==( const Activity &rActivity );
+        bool operator==( const Activity &rActivity ) const;
 
         virtual ~Activity() {
             //delete place;

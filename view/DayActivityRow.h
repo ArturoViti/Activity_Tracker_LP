@@ -11,7 +11,6 @@
 #include "model/Activity.h"
 #include "DayActivitiesList.h"
 
-#include "DayActivitiesView.h"
 #include "config.h"
 
 class DayActivityRow : public QListWidgetItem {
@@ -22,15 +21,17 @@ class DayActivityRow : public QListWidgetItem {
         QLabel *labelStartEndActivity;
         QPushButton *openButton;
         QPushButton *deleteButton;
-public:
-    QPushButton *getDeleteButton() const;
-    void deleteRequested(const Activity &activity);
 
-private:
-    Activity *rowData;
+    public:
+        QPushButton *getDeleteButton() const;
+        void deleteRequested(const Activity &activity);
+
+    private:
+        Activity *rowData;
     public:
         DayActivityRow( const Activity &activity );
         QWidget *getWidget();
+        Activity getActivity();
 
 };
 

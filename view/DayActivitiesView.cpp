@@ -26,8 +26,6 @@ void DayActivitiesView::setupUI() {
     label->setText("Le tue Attività");
     label->setAlignment( Qt::AlignBottom | Qt::AlignCenter );
     activityLayout->addWidget(label);
-
-
     listView = new DayActivitiesList;
     activityLayout->addWidget(listView);
 
@@ -47,20 +45,27 @@ void DayActivitiesView::resizeEvent( QResizeEvent *event )  {
 }
 
 void DayActivitiesView::update() {
-    cout << "Evento!" << endl;
+    // @TODO: messaggio di inserimento completato
 
     Activity newActivity = model->getActivities().back();
     DayActivityRow *item = new DayActivityRow(newActivity);
     listView->addItem(item);
     listView->setItemWidget( item, item->getWidget() );
-
+    QPushButton *button = item->getDeleteButton();
+    connect(button, &QPushButton::clicked, this, [this, item]() {
+        deleteRow(item);
+    });
 }
 
-void DayActivitiesView::deleteActivity( const Activity &activity ) {
-    controller->removeActivity(activity);
+void DayActivitiesView::deleteRow( DayActivityRow *item ) {
+    controller->removeActivity(item->getActivity());
+    delete item;
+    for ( auto i : model->getActivities() )
+        cout << i.getName();
 }
 
 void DayActivitiesView::updateOnDelete() {
-    cout << "Cancello";
+    // @TODO: messaggio di cancellazione completata
+
 }
 

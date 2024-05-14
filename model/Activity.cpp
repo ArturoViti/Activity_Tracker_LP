@@ -76,6 +76,6 @@ void Activity::removeTag( const Tag &tag ) {
         tags.erase(it);
 }
 
-bool Activity::operator==( const Activity &rActivity ) {
+bool Activity::operator==( const Activity &rActivity ) const {
     return ( start == rActivity.start && end == rActivity.end && name == rActivity.name );
 }

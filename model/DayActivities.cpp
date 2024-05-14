@@ -35,7 +35,7 @@ void DayActivities::addActivity( const Activity &activity ) {
 void DayActivities::removeActivity( const Activity &activity ) {
     auto it = find_if( activities.begin(), activities.end(),
     [&activity] ( const Activity &temp ) {
-            return ( &activity == &temp );
+            return ( activity == temp );
         }
     );
 
@@ -44,7 +44,6 @@ void DayActivities::removeActivity( const Activity &activity ) {
         this->activities.erase( it );
         notifyDelete();
     }
-
 }
 
 int DayActivities::getNumOfActivities() {
