@@ -34,3 +34,7 @@ QPushButton *DayActivityRow::getDeleteButton() const {
 Activity DayActivityRow::getActivity() {
     return *rowData;
 }
+
+QPushButton *DayActivityRow::getOpenButton() const {
+    return openButton;
+}

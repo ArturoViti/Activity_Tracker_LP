@@ -49,9 +49,15 @@ void DayActivitiesView::update() {
     DayActivityRow *item = new DayActivityRow(newActivity);
     listView->addItem(item);
     listView->setItemWidget( item, item->getWidget() );
-    QPushButton *button = item->getDeleteButton();
-    connect(button, &QPushButton::clicked, this, [this, item]() {
+    QPushButton *removeButtonInstance = item->getDeleteButton();
+    QPushButton *openButtonInstance = item->getOpenButton();
+    connect(removeButtonInstance, &QPushButton::clicked, this, [this, item]() {
         deleteRow(item);
+    });
+    connect(openButtonInstance, &QPushButton::clicked, this, [this, item]() {
+        Activity tempActivity = item->getActivity();
+        addUpdateActivityWindow = new AddUpdateActivitiesView( model, controller, &tempActivity );
+        addUpdateActivityWindow->show();
     });
 
     QMessageBox *msgBox = new QMessageBox;

@@ -72,7 +72,7 @@ void AddUpdateActivitiesView::setupUI() {
     layout->addWidget(ratingComboBox, 2, 1);
 
     QList<QAbstractButton*> buttonList = objectsComboBox->buttons();
-    for ( auto it = buttonList.cbegin(); it!=buttonList.cend(); ++it )
+    for ( auto it = buttonList.cbegin(); it != buttonList.cend(); ++it )
         tagsLayout->addWidget(*it);
 
     layout->addWidget(new QLabel("Luogo:"), 3, 0);
@@ -169,4 +169,72 @@ AddUpdateActivitiesView::~AddUpdateActivitiesView() {
     delete dateEdit;
     delete model;
     delete controller;
+}
+
+void AddUpdateActivitiesView::fillUI( const Activity &activity ) {
+    // Nome
+    activityName->setText( QString::fromStdString(activity.getName()) );
+
+    // Descrizione
+    activityDescription->setText( QString::fromStdString(activity.getDescription()) );
+
+    // Voto all'attività
+    QString ratingString = "";
+    for ( const auto& pair : ActivityRatings )
+        if ( pair.second == activity.getVote() )
+            ratingString = QString::fromStdString( pair.first );
+
+    if ( !ratingString.isEmpty() )
+        ratingComboBox->setCurrentText(ratingString);
+
+    // Tags
+    for ( QAbstractButton *button : objectsComboBox->buttons() )
+    {
+        QCheckBox *checkbox = qobject_cast<QCheckBox *>(button);
+        if ( checkbox )
+        {
+            for ( const Tag &tag : activity.getTags() )
+            {
+                if ( checkbox->text().toStdString() == tag.getName() )
+                {
+                    checkbox->setChecked(true);
+                    break;
+                }
+            }
+        }
+    }
+
+    // Luogo
+    QString placeString = QString::fromStdString( activity.getPlace()->serializePlace() );
+    if ( !placeString.isEmpty() )
+        locationComboBox->setCurrentText(placeString);
+
+    // Ora Inizio
+    startTimeEdit->setTime( activity.getStart() );
+
+    // Ora Fine
+    endTimeEdit->setTime( activity.getAnEnd() );
+
+    saveActivityButton->hide();
+}
+
+void AddUpdateActivitiesView::resetUI() {
+    activityName->clear();
+    activityDescription->clear();
+    ratingComboBox->setCurrentIndex(0);
+    locationComboBox->setCurrentIndex(0);
+    QTime temp(0,0);
+    startTimeEdit->setTime( temp );
+    endTimeEdit->setTime( temp );
+    dateEdit->setDate(QDate::currentDate());
+
+
+    for ( QAbstractButton *button : objectsComboBox->buttons() )
+    {
+        QCheckBox *checkbox = qobject_cast<QCheckBox *>(button);
+        if ( checkbox )
+            checkbox->setChecked(false);
+    }
+
+    saveActivityButton->show();
 }

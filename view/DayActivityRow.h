@@ -24,7 +24,7 @@ class DayActivityRow : public QListWidgetItem {
 
     public:
         QPushButton *getDeleteButton() const;
-        void deleteRequested(const Activity &activity);
+        QPushButton *getOpenButton() const;
 
     private:
         Activity *rowData;

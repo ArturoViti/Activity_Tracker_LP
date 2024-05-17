@@ -17,7 +17,6 @@
 #include <QObject>
 #include <QMessageBox>
 
-#include "../model/ActivityVote.h"
 #include "../model/Tag.h"
 #include "../model/Place.h"
 #include "../model/DayActivities.h"
@@ -41,19 +40,31 @@ class AddUpdateActivitiesView : public MainWindowView {
         DayActivitiesController *controller;
 
         void setupUI();
+        void fillUI( const Activity &activity );
+        void resetUI();
 
     private slots:
         void saveActivityFromView();
 
+    protected:
+        void closeEvent( QCloseEvent *event ) override {
+            resetUI();
+        }
+
     public:
-        explicit AddUpdateActivitiesView( DayActivities *model, DayActivitiesController *controller,
+        explicit AddUpdateActivitiesView( DayActivities *model, DayActivitiesController *controller, Activity *activity = nullptr,
                 QWidget *parent = nullptr, int width = WIDTH_SCREEN_SIZE / 2,
-                int height = HEIGHT_SCREEN_SIZE / 2 ) : MainWindowView(parent, width, height ) {
+                int height = HEIGHT_SCREEN_SIZE / 2  ) : MainWindowView( parent, width, height ) {
 
             this->model = model;
             this->controller = controller;
 
             setupUI();
+
+            // Logica di popolazine della modale
+            if ( activity != nullptr )
+                fillUI( *activity );
+
             connect( saveActivityButton, &QPushButton::clicked, this,
                      &AddUpdateActivitiesView::saveActivityFromView );
         }
