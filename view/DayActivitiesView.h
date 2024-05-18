@@ -50,6 +50,8 @@ class DayActivitiesView : public MainWindowView, public Observer {
             addUpdateActivityWindow->show();
         }
 
+        void onChangeDateDay( const QDate &date );
+
     protected:
         void resizeEvent( QResizeEvent *event ) override;
 
@@ -65,12 +67,13 @@ class DayActivitiesView : public MainWindowView, public Observer {
 
             connect( button, &QPushButton::clicked, this,
                      &DayActivitiesView::openAddUpdateActivityWindow );
+
+            connect( calendar, &QCalendarWidget::clicked, this, &DayActivitiesView::onChangeDateDay );
         }
 
         virtual ~DayActivitiesView() {
             model->removeObserver(this);
         }
-
 
         virtual void update() override;
         virtual void updateOnDelete() override;

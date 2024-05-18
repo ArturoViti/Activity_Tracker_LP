@@ -21,13 +21,6 @@ class DayActivities  : public Subject {
         DayActivities( const DayActivities &sourceDay ) : dateDay(sourceDay.dateDay),
             activities(sourceDay.activities) { };
 
-        /*inline DayActivities operator=( const DayActivities &rDay ) {
-            dateDay = rDay.dateDay;
-            activities = rDay.activities;
-
-            return *this;
-        }*/
-
         virtual void addObserver( Observer *o ) override;
         virtual void removeObserver( Observer *o ) override;
         virtual void notify() override;

@@ -84,3 +84,7 @@ void DayActivitiesView::updateOnDelete() {
     msgBox->exec();
 }
 
+void DayActivitiesView::onChangeDateDay( const QDate &date ) {
+    cout << "Change";
+}
+
