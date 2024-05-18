@@ -35,6 +35,7 @@ class AddUpdateActivitiesView : public MainWindowView {
         QTimeEdit *startTimeEdit;
         QTimeEdit *endTimeEdit;
         QDateEdit *dateEdit;
+        QDate selectedDate;
 
         DayActivities *model;
         DayActivitiesController *controller;
@@ -52,12 +53,13 @@ class AddUpdateActivitiesView : public MainWindowView {
         }
 
     public:
-        explicit AddUpdateActivitiesView( DayActivities *model, DayActivitiesController *controller, Activity *activity = nullptr,
+        explicit AddUpdateActivitiesView( DayActivities *model, DayActivitiesController *controller, const QDate &date, Activity *activity = nullptr,
                 QWidget *parent = nullptr, int width = WIDTH_SCREEN_SIZE / 2,
                 int height = HEIGHT_SCREEN_SIZE / 2  ) : MainWindowView( parent, width, height ) {
 
             this->model = model;
             this->controller = controller;
+            this->selectedDate = date;
 
             setupUI();
 

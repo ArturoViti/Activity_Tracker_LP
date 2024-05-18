@@ -57,7 +57,8 @@ void AddUpdateActivitiesView::setupUI() {
     endTimeEdit = new QTimeEdit(this);
 
     // Campo Data
-    dateEdit = new QDateEdit( QDate::currentDate() );
+    dateEdit = new QDateEdit( selectedDate );
+    dateEdit->setReadOnly(true);
 
     // Pulsante di Salvataggio
     saveActivityButton = new QPushButton( "Salva Attività");

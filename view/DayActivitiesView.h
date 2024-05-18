@@ -36,6 +36,7 @@ class DayActivitiesView : public MainWindowView, public Observer {
 
         AddUpdateActivitiesView *addUpdateActivityWindow;
         DayActivities *model;
+        vector<DayActivities*> dayRegistry;
         DayActivitiesController *controller;
 
         inline void updateCalendarWidth() {
@@ -43,6 +44,8 @@ class DayActivitiesView : public MainWindowView, public Observer {
         }
 
         void setupUI();
+
+        void refreshAll(const QDate date);
 
 
     private slots:

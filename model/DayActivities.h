@@ -21,6 +21,10 @@ class DayActivities  : public Subject {
         DayActivities( const DayActivities &sourceDay ) : dateDay(sourceDay.dateDay),
             activities(sourceDay.activities) { };
 
+        bool operator==( const DayActivities &other ) const {
+            return dateDay == other.dateDay && activities == other.activities;
+        }
+
         virtual void addObserver( Observer *o ) override;
         virtual void removeObserver( Observer *o ) override;
         virtual void notify() override;

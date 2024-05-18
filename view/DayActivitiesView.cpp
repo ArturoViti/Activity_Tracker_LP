@@ -36,7 +36,7 @@ void DayActivitiesView::setupUI() {
     mainLayout->addLayout(calendarButtonLayout);
     mainLayout->addLayout(activityLayout);
 
-    addUpdateActivityWindow = new AddUpdateActivitiesView( model, controller );
+    addUpdateActivityWindow = new AddUpdateActivitiesView( model, controller, QDate::currentDate() );
 }
 
 void DayActivitiesView::resizeEvent( QResizeEvent *event )  {
@@ -56,7 +56,7 @@ void DayActivitiesView::update() {
     });
     connect(openButtonInstance, &QPushButton::clicked, this, [this, item]() {
         Activity tempActivity = item->getActivity();
-        addUpdateActivityWindow = new AddUpdateActivitiesView( model, controller, &tempActivity );
+        addUpdateActivityWindow = new AddUpdateActivitiesView( model, controller, model->getDateDay(), &tempActivity );
         addUpdateActivityWindow->show();
     });
 
@@ -84,7 +84,66 @@ void DayActivitiesView::updateOnDelete() {
     msgBox->exec();
 }
 
+
+void DayActivitiesView::refreshAll( const QDate date ) {
+    for( auto newActivity : model->getActivities() )
+    {
+        cout << newActivity.getName() << endl;
+        DayActivityRow *item = new DayActivityRow(newActivity);
+        listView->addItem(item);
+        listView->setItemWidget( item, item->getWidget() );
+        QPushButton *removeButtonInstance = item->getDeleteButton();
+        QPushButton *openButtonInstance = item->getOpenButton();
+        connect(removeButtonInstance, &QPushButton::clicked, this, [this, item]() {
+            deleteRow(item);
+        });
+        connect(openButtonInstance, &QPushButton::clicked, this, [this, item]() {
+            Activity tempActivity = item->getActivity();
+            addUpdateActivityWindow = new AddUpdateActivitiesView( model, controller, model->getDateDay(), &tempActivity );
+            addUpdateActivityWindow->show();
+        });
+    }
+
+}
+
+
 void DayActivitiesView::onChangeDateDay( const QDate &date ) {
-    cout << "Change";
+    listView->clear();
+
+    // Backup dell'attuale modello <> vengo da un giorno con attività
+    DayActivities *backup = model;
+    if ( model->getNumOfActivities() > 0 )
+    {
+        bool exists = std::any_of(dayRegistry.begin(), dayRegistry.end(),
+          [&backup](DayActivities* existing) {
+                    return existing->getDateDay() == backup->getDateDay();
+        });
+
+        if ( !exists )
+            dayRegistry.push_back(backup);
+    }
+
+
+    // Carica il nuovo modello per la data selezionata
+    auto it = std::find_if(dayRegistry.begin(), dayRegistry.end(), [&date](DayActivities* activities) {
+        return activities->getDateDay() == date;
+    });
+
+    if ( it != dayRegistry.end() )
+    {
+        model = *it;
+        controller = new DayActivitiesController(model);
+        addUpdateActivityWindow = new AddUpdateActivitiesView( model, controller, date );
+        refreshAll( date );
+    }
+    else
+    {
+        vector <Activity> act;
+        model = new DayActivities(act, date);
+        model->addObserver(this);
+        controller = new DayActivitiesController(model);
+        addUpdateActivityWindow = new AddUpdateActivitiesView( model, controller, date );
+
+    }
 }
 
