@@ -18,8 +18,7 @@ add_subdirectory(test)
 
 set( SOURCE_FILES
     model/ActivityVote.h
-    model/SportActivityType.h
-    model/Tag.h
+        model/Tag.h
     model/Tag.cpp
     model/Place.cpp
     model/Place.h

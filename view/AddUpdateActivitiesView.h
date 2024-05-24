@@ -53,7 +53,8 @@ class AddUpdateActivitiesView : public MainWindowView {
         }
 
     public:
-        explicit AddUpdateActivitiesView( DayActivities *model, DayActivitiesController *controller, const QDate &date, Activity *activity = nullptr,
+        explicit AddUpdateActivitiesView( DayActivities *model, DayActivitiesController *controller,
+                const QDate &date, Activity *activity = nullptr,
                 QWidget *parent = nullptr, int width = WIDTH_SCREEN_SIZE / 2,
                 int height = HEIGHT_SCREEN_SIZE / 2  ) : MainWindowView( parent, width, height ) {
 

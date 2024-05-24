@@ -21,17 +21,14 @@ class DayActivityRow : public QListWidgetItem {
         QLabel *labelStartEndActivity;
         QPushButton *openButton;
         QPushButton *deleteButton;
-
-    public:
-        QPushButton *getDeleteButton() const;
-        QPushButton *getOpenButton() const;
-
-    private:
         Activity *rowData;
+
     public:
         DayActivityRow( const Activity &activity );
         QWidget *getWidget();
         Activity getActivity();
+        QPushButton *getDeleteButton() const;
+        QPushButton *getOpenButton() const;
 
 };
 
