@@ -206,7 +206,7 @@ void AddUpdateActivitiesView::fillUI( const Activity &activity ) {
     }
 
     // Luogo
-    QString placeString = QString::fromStdString( activity.getPlace()->serializePlace() );
+    QString placeString = QString::fromStdString( activity.getPlace().serializePlace() );
     if ( !placeString.isEmpty() )
         locationComboBox->setCurrentText(placeString);
 

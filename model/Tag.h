@@ -11,11 +11,14 @@ class Tag {
 
 
     public:
-            explicit Tag( std::string name, const QColor &color ) : name(name), color(color) { };
+            Tag( std::string name, const QColor &color ) : name(name), color(color) { };
 
             Tag( const Tag& that ) : name(that.name), color(that.color) { }
 
             inline Tag& operator=( const Tag &rTag ) {
+                if ( this == &rTag )
+                    return *this;
+
                 name = rTag.name;
                 color = rTag.color;
                 return *this;
@@ -25,8 +28,7 @@ class Tag {
                 return ( name == rTag.name && color == rTag.color );
             }
 
-            const std::string &getName() const;
-            void setName( const std::string &name );
+            std::string getName() const;
             QColor getColor() const;
     };
 

@@ -22,11 +22,6 @@ const QDate &DayActivities::getDateDay() const {
     return dateDay;
 }
 
-void DayActivities::setDateDay( const QDate &dateDay ) {
-    DayActivities::dateDay = dateDay;
-    notify();
-}
-
 void DayActivities::addActivity( const Activity &activity ) {
     this->activities.push_back( activity );
     notify();
@@ -50,7 +45,7 @@ int DayActivities::getNumOfActivities() {
     return activities.size();
 }
 
-const vector<Activity> &DayActivities::getActivities() const {
+vector<Activity> DayActivities::getActivities() const {
     return activities;
 }
 

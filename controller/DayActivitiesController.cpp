@@ -17,9 +17,6 @@ void DayActivitiesController::addActivity( const Activity &activity ) {
 }
 
 void DayActivitiesController::removeActivity( const Activity &activity ) {
+    // @TODO: controlla che l'attività esista
     model->removeActivity( activity );
-}
-
-const vector<Activity> &DayActivitiesController::getActivities() const {
-    return model->getActivities();
 }

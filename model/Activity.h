@@ -21,14 +21,14 @@ class Activity {
         string description;
         ActivityVote vote;
         vector<Tag> tags;
-        Place *place;
+        Place place;
         QTime start;
         QTime end;
 
     public:
         Activity( string name, QTime &start, QTime &end, const vector<Tag> &tags, Place &place, string desc="",
                   ActivityVote vote=ActivityVote::NONE ):
-                  name(name), description(desc), vote(vote), tags(tags), place(&place) {
+                  name(name), description(desc), vote(vote), tags(tags), place(place) {
             try
             {
                 this->start = start;
@@ -48,6 +48,9 @@ class Activity {
             end(sourceActivity.end) { }
 
         inline Activity& operator=( const Activity &rActivity ) {
+            if ( this == &rActivity)
+                return *this;
+
             name = rActivity.name;
             description = rActivity.description;
             vote = rActivity.vote;
@@ -61,33 +64,13 @@ class Activity {
 
         bool operator==( const Activity &rActivity ) const;
 
-        virtual ~Activity() {
-            //delete place;
-            //delete start;
-            //delete end;
-        }
-
-        const string &getName() const;
-        void setName( const string &name );
-
-        const string &getDescription() const;
-        void setDescription( const string &description );
-
+        string getName() const;
+        string getDescription() const;
         ActivityVote getVote() const;
-        void setVote( ActivityVote vote );
-
-        const vector<Tag> &getTags() const;
-        void addTag( const Tag &tag );
-        void removeTag( const Tag &tag );
-
-        Place *getPlace() const;
-        void setPlace( Place &place );
-
+        vector<Tag> getTags() const;
+        Place getPlace() const;
         QTime getAnEnd() const;
-        void setAnEnd( QTime &anEnd );
-
         QTime getStart() const;
-        void setStart( QTime &start );
 };
 
 
