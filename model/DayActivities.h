@@ -35,7 +35,7 @@ class DayActivities  : public Subject {
         int getNumOfActivities();
 
         vector<Activity> getActivities() const;
-        const QDate &getDateDay() const;
+        QDate getDateDay() const;
 
 };
 

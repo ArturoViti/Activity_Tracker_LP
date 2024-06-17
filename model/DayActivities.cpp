@@ -18,7 +18,7 @@ void DayActivities::notifyDelete() {
         observer->updateOnDelete();
 }
 
-const QDate &DayActivities::getDateDay() const {
+QDate DayActivities::getDateDay() const {
     return dateDay;
 }
 
