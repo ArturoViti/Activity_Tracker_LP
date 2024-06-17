@@ -23,11 +23,23 @@ QDate DayActivities::getDateDay() const {
 }
 
 void DayActivities::addActivity( const Activity &activity ) {
+    auto activitiesStart = activities.begin();
+    auto activitiesEnd = activities.end();
+    auto it = find_if( activitiesStart, activitiesEnd,
+       [activity] (const Activity &temp) {
+           return ( (activity.getStart() < temp.getAnEnd()) || (activity.getAnEnd() < temp.getStart()) );
+       }
+    );
+
+    if ( it != activitiesEnd )
+        throw IntervalAlreadyOccupiedException();
+
     this->activities.push_back( activity );
     notify();
 }
 
 void DayActivities::removeActivity( const Activity &activity ) {
+    // @TODO: controlla che l'attività esista e lancia eccezione
     auto it = find_if( activities.begin(), activities.end(),
     [&activity] ( const Activity &temp ) {
             return ( activity == temp );
