@@ -60,13 +60,8 @@ void DayActivitiesView::update() {
         addUpdateActivityWindow->show();
     });
 
-    QMessageBox *msgBox = new QMessageBox;
-    QPixmap *exportSuccess = new QPixmap(QString::fromStdString("../" + SUCCESS_ICON_PATH) );
-    msgBox->setIconPixmap(*exportSuccess);
-    msgBox->setText( QString::fromStdString(SUCCESS_TEXT ) );
-    msgBox->setWindowTitle( QString::fromStdString(SUCCESS_TITLE) );
-    msgBox->addButton( QMessageBox::Ok );
-    msgBox->exec();
+    SuccessMessagebox msgBox;
+    msgBox.show();
 }
 
 void DayActivitiesView::deleteRow( DayActivityRow *item ) {
@@ -75,13 +70,8 @@ void DayActivitiesView::deleteRow( DayActivityRow *item ) {
 }
 
 void DayActivitiesView::updateOnDelete() {
-    QMessageBox *msgBox = new QMessageBox;
-    QPixmap *exportSuccess = new QPixmap(QString::fromStdString("../" + SUCCESS_DELETE_ICON_PATH) );
-    msgBox->setIconPixmap(*exportSuccess);
-    msgBox->setText( QString::fromStdString(SUCCESS_DELETE_TEXT ) );
-    msgBox->setWindowTitle( QString::fromStdString(SUCCESS_TITLE) );
-    msgBox->addButton( QMessageBox::Ok );
-    msgBox->exec();
+    SuccessMessagebox msgBox;
+    msgBox.show( SUCCESS_DELETE_TEXT );
 }
 
 

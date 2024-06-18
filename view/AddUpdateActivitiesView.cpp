@@ -126,43 +126,23 @@ void AddUpdateActivitiesView::saveActivityFromView() {
         //emit this->activitySaved();
     }
     catch ( const EmptyActivityNameException &eane ) {
-        QMessageBox *msgBox = new QMessageBox;
-        QPixmap *exportSuccess = new QPixmap(QString::fromStdString("../" + ERROR_ICON_PATH) );
-        msgBox->setIconPixmap(*exportSuccess);
-        msgBox->setText( QString::fromStdString(eane.what() ) );
-        msgBox->setWindowTitle( QString::fromStdString(ERROR_TITLE) );
-        msgBox->addButton( QMessageBox::Ok );
-        msgBox->exec();
+        ErrorMessageBox msgBox;
+        msgBox.show( eane.what() );
     }
     catch ( const WrongIntervalException &wie )
     {
-        QMessageBox *msgBox = new QMessageBox;
-        QPixmap *exportSuccess = new QPixmap(QString::fromStdString("../" + ERROR_ICON_PATH) );
-        msgBox->setIconPixmap(*exportSuccess);
-        msgBox->setText( QString::fromStdString(wie.what() ) );
-        msgBox->setWindowTitle( QString::fromStdString(ERROR_TITLE) );
-        msgBox->addButton( QMessageBox::Ok );
-        msgBox->exec();
+        ErrorMessageBox msgBox;
+        msgBox.show( wie.what() );
     }
     catch ( const IntervalAlreadyOccupiedException &iao )
     {
-        QMessageBox *msgBox = new QMessageBox;
-        QPixmap *exportSuccess = new QPixmap(QString::fromStdString("../" + ERROR_ICON_PATH) );
-        msgBox->setIconPixmap(*exportSuccess);
-        msgBox->setText( QString::fromStdString(iao.what() ) );
-        msgBox->setWindowTitle( QString::fromStdString(ERROR_TITLE) );
-        msgBox->addButton( QMessageBox::Ok );
-        msgBox->exec();
+        ErrorMessageBox msgBox;
+        msgBox.show( iao.what() );
     }
     catch ( ... )
     {
-        QMessageBox *msgBox = new QMessageBox;
-        QPixmap *exportSuccess = new QPixmap(QString::fromStdString("../" + ERROR_ICON_PATH) );
-        msgBox->setIconPixmap(*exportSuccess);
-        msgBox->setText( QString::fromStdString(ERROR_GENERIC_TEXT) );
-        msgBox->setWindowTitle( QString::fromStdString(ERROR_TITLE) );
-        msgBox->addButton( QMessageBox::Ok );
-        msgBox->exec();
+        ErrorMessageBox msgBox;
+        msgBox.show();
     }
 }
 

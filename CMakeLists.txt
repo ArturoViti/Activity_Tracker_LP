@@ -53,6 +53,9 @@ set( SOURCE_FILES
         exception/EmptyTagNameException.h
         exception/EmptyActivityNameException.cpp
         exception/EmptyActivityNameException.h
+        view/MessageBox.h
+        view/SuccessMessagebox.h
+        view/ErrorMessageBox.h
 )
 
 add_executable(Activity_Tracker_LP main.cpp)

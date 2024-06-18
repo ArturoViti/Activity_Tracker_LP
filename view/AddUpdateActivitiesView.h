@@ -22,6 +22,8 @@
 #include "../model/DayActivities.h"
 #include "../controller/DayActivitiesController.h"
 #include "MainWindowView.h"
+#include "ErrorMessageBox.h"
+#include "SuccessMessagebox.h"
 #include "../exception/IntervalAlreadyOccupiedException.h"
 #include "../exception/EmptyActivityNameException.h"
 
