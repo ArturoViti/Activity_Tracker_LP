@@ -23,6 +23,7 @@
 #include "../controller/DayActivitiesController.h"
 #include "MainWindowView.h"
 #include "../exception/IntervalAlreadyOccupiedException.h"
+#include "../exception/EmptyActivityNameException.h"
 
 class AddUpdateActivitiesView : public MainWindowView {
     private:

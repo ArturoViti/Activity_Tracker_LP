@@ -3,35 +3,29 @@
 
 #include<iostream>
 #include<QColor>
+#include "../exception/EmptyTagNameException.h"
+
 
 class Tag {
     private:
         std::string name;
         QColor color;
 
-
     public:
-            Tag( std::string name, const QColor &color ) : name(name), color(color) { };
+        Tag( std::string name, const QColor &color=QColor(0, 0, 0) ) {
+            if ( name == "" )
+                throw EmptyTagNameException();
+            this->name = name;
+            this->color = color;
+        };
 
-            Tag( const Tag& that ) : name(that.name), color(that.color) { }
+        inline bool operator==( const Tag &rTag ) const {
+            return ( name == rTag.name && color == rTag.color );
+        }
 
-            inline Tag& operator=( const Tag &rTag ) {
-                if ( this == &rTag )
-                    return *this;
-
-                name = rTag.name;
-                color = rTag.color;
-                return *this;
-            }
-
-            inline bool operator==( const Tag &rTag ) {
-                return ( name == rTag.name && color == rTag.color );
-            }
-
-            std::string getName() const;
-            QColor getColor() const;
+        std::string getName() const;
+        QColor getColor() const;
     };
-
 
 
 #endif //ACTIVITY_TRACKER_LP_TAG_H

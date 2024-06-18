@@ -9,6 +9,7 @@
 #include "Tag.h"
 #include "Place.h"
 #include "../exception/WrongIntervalException.h"
+#include "../exception/EmptyActivityNameException.h"
 
 using namespace std;
 
@@ -27,8 +28,12 @@ class Activity {
 
     public:
         Activity( string name, QTime &start, QTime &end, const vector<Tag> &tags, Place &place, string desc="",
-                  ActivityVote vote=ActivityVote::NONE ):
-                  name(name), description(desc), vote(vote), tags(tags), place(place) {
+                  ActivityVote vote=ActivityVote::NONE ): description(desc), vote(vote), tags(tags), place(place) {
+            if ( name == "" )
+                throw EmptyActivityNameException();
+
+            this->name = name;
+
             try
             {
                 this->start = start;
@@ -37,9 +42,9 @@ class Activity {
             }
             catch ( const WrongIntervalException& ex )
             {
-                cout << ex.what();
                 throw;
             }
+
         }
 
         Activity( const Activity &sourceActivity ) :

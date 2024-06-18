@@ -47,6 +47,12 @@ set( SOURCE_FILES
         view/DayActivitiesList.h
         view/DayActivityRow.cpp
         view/DayActivityRow.h
+        exception/EmptyPlaceNameException.cpp
+        exception/EmptyPlaceNameException.h
+        exception/EmptyTagNameException.cpp
+        exception/EmptyTagNameException.h
+        exception/EmptyActivityNameException.cpp
+        exception/EmptyActivityNameException.h
 )
 
 add_executable(Activity_Tracker_LP main.cpp)

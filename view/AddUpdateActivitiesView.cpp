@@ -19,7 +19,6 @@ void AddUpdateActivitiesView::setupUI() {
         ratingComboBox->addItem( QString::fromStdString(pair.first) );
 
     // Campo Tags
-    // Generazione dei Tags @TODO: Sposta Complessità Altrove
     Tag *tag1 = new Tag( "Formazione", *(new QColor(Qt::blue)) );
     Tag *tag2 = new Tag( "Università", *(new QColor(Qt::darkGreen)) );
     Tag *tag3 = new Tag( "Lavoro", *(new QColor(Qt::red)) );
@@ -125,6 +124,15 @@ void AddUpdateActivitiesView::saveActivityFromView() {
             tags, tempPlace, activityDescription->text().toStdString(), currentVote );
         controller->addActivity( *activity );
         //emit this->activitySaved();
+    }
+    catch ( const EmptyActivityNameException &eane ) {
+        QMessageBox *msgBox = new QMessageBox;
+        QPixmap *exportSuccess = new QPixmap(QString::fromStdString("../" + ERROR_ICON_PATH) );
+        msgBox->setIconPixmap(*exportSuccess);
+        msgBox->setText( QString::fromStdString(eane.what() ) );
+        msgBox->setWindowTitle( QString::fromStdString(ERROR_TITLE) );
+        msgBox->addButton( QMessageBox::Ok );
+        msgBox->exec();
     }
     catch ( const WrongIntervalException &wie )
     {
