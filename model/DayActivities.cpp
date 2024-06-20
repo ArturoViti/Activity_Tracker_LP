@@ -39,7 +39,6 @@ void DayActivities::addActivity( const Activity &activity ) {
 }
 
 void DayActivities::removeActivity( const Activity &activity ) {
-    // @TODO: controlla che l'attività esista e lancia eccezione
     auto it = find_if( activities.begin(), activities.end(),
     [&activity] ( const Activity &temp ) {
             return ( activity == temp );
@@ -59,6 +58,17 @@ int DayActivities::getNumOfActivities() {
 
 vector<Activity> DayActivities::getActivities() const {
     return activities;
+}
+
+const Activity DayActivities::searchActivityByName( string name ) const {
+    auto it = std::find_if(activities.begin(), activities.end(),
+       [name](const Activity& temp) { return name == temp.getName(); }
+   );
+
+    if ( it != activities.end() )
+        return *it;
+    else
+        throw ActivityNotFoundException();
 }
 
 

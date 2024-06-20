@@ -1,27 +1,47 @@
-#include<gtest/gtest.h>
+#include <gtest/gtest.h>
 #include "../model/Activity.h"
 
-TEST( Activity, MainConstructor ) {
-    std::string name = "Ripasso";
-    std::string desc = "Laboratorio di Programmazione";
-    std::vector<Tag> tags;
-    Tag tag = Tag( "Università", *(new QColor(Qt::blue)) );
-    tags.push_back(tag);
-    QTime start = QTime( 0 ,0);
-    QTime end = QTime( 0 ,10);
-    Place place = Place( "Morgagni", "Viale Morgagni" );
-    Activity *activity = new Activity( name, start, end, tags, place );
-    ASSERT_EQ( name, activity->getName() );
+class ActivityTest : public ::testing::Test {
+    protected:
+        std::string name;
+        std::string desc;
+        std::vector<Tag> tags;
+        Place *place;
+        QTime start;
+        QTime end;
+
+        void SetUp() override {
+            name = "Ripasso";
+            desc = "Laboratorio di Programmazione";
+            tags.push_back(Tag("Università", *(new QColor(Qt::blue))));
+            start = QTime(0, 0);
+            end = QTime(0, 10);
+            place = new Place("Morgagni", "Viale Morgagni");
+        }
+
+        void TearDown() override {
+            delete place;
+        }
+};
+
+TEST_F( ActivityTest, RegularIntervalNoException ) {
+    QTime start;
+    QTime end;
+    start = QTime(0, 0);
+    end = QTime(0, 10);
+    Activity* activity = new Activity(name, start, end, tags, *place);
+    ASSERT_EQ(name, activity->getName());
+    delete activity;
 }
 
-TEST( Activity, MainConstructorIntervalException ) {
-    std::string name = "Ripasso";
-    std::string desc = "Laboratorio di Programmazione";
-    std::vector<Tag> tags;
-    Tag tag = Tag( "Università", *(new QColor(Qt::blue)) );
-    tags.push_back(tag);
-    QTime start = QTime( 5 ,50);
-    QTime end = QTime( 0 ,30);
-    Place place = Place( "Morgagni", "Viale Morgagni" );
-    ASSERT_THROW( new Activity(name, start, end, tags, place, desc, ActivityVote::GOOD), WrongIntervalException );
+TEST_F( ActivityTest, EmptyNameException ) {
+    name = "";
+    ASSERT_THROW(new Activity(name, start, end, tags, *place), EmptyActivityNameException );
+}
+
+TEST_F( ActivityTest, WrongIntervalException ) {
+    name = "";
+    start = QTime(0,30);
+    end = QTime(0,10);
+    ASSERT_THROW(new Activity(name, start, end, tags, *place), EmptyActivityNameException );
 }

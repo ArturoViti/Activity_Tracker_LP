@@ -56,6 +56,8 @@ set( SOURCE_FILES
         view/MessageBox.h
         view/SuccessMessagebox.h
         view/ErrorMessageBox.h
+        exception/ActivityNotFoundException.cpp
+        exception/ActivityNotFoundException.h
 )
 
 add_executable(Activity_Tracker_LP main.cpp)

@@ -6,6 +6,7 @@
 #include "Activity.h"
 #include "Subject.h"
 #include "../exception/IntervalAlreadyOccupiedException.h"
+#include "../exception/ActivityNotFoundException.h"
 
 class DayActivities  : public Subject {
 
@@ -32,6 +33,7 @@ class DayActivities  : public Subject {
 
         void addActivity( const Activity &activity );
         void removeActivity( const Activity &activity );
+        const Activity searchActivityByName( string name ) const;
         int getNumOfActivities();
 
         vector<Activity> getActivities() const;
