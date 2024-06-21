@@ -19,7 +19,12 @@ class Place {
 
         explicit Place( std::string nameWithLocation, char separator='-' ) {
             size_t pos = nameWithLocation.find(separator);
-            this->name = nameWithLocation.substr(0, pos);
+            std::string extractedName = nameWithLocation.substr(0, pos);
+
+            if ( extractedName == "" )
+                throw EmptyPlaceNameException();
+
+            this->name = extractedName;
             this->location = nameWithLocation.substr(pos + 1);
         }
 
