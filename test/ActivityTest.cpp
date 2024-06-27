@@ -40,8 +40,7 @@ TEST_F( ActivityTest, EmptyNameException ) {
 }
 
 TEST_F( ActivityTest, WrongIntervalException ) {
-    name = "";
     start = QTime(0,30);
     end = QTime(0,10);
-    ASSERT_THROW(new Activity(name, start, end, tags, *place), EmptyActivityNameException );
+    ASSERT_THROW(new Activity(name, start, end, tags, *place), WrongIntervalException );
 }
